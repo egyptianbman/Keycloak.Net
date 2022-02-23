@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Keycloak.Net.Model.Converters;
+using Keycloak.Net.Shared.Json;
 using Newtonsoft.Json;
 
 namespace Keycloak.Net.Model.Clients
@@ -69,7 +69,6 @@ namespace Keycloak.Net.Model.Clients
         public string? CHash { get; set; }
 
         [JsonProperty("category")]
-        [JsonConverter(typeof(AccessTokenCategoriesConverter))]
         public AccessTokenCategories? Category { get; set; }
 
         /// <summary>

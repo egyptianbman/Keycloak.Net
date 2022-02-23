@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Keycloak.Net.Model.Converters;
+using Keycloak.Net.Shared.Json;
 using Newtonsoft.Json;
 
 namespace Keycloak.Net.Model.Clients
@@ -59,7 +59,6 @@ namespace Keycloak.Net.Model.Clients
 
         /// <inheritdoc cref="Clients.ClientAuthenticatorType"/>
         [JsonProperty("clientAuthenticatorType")]
-        [JsonConverter(typeof(ClientAuthenticatorTypeConverter))]
         public ClientAuthenticatorType? ClientAuthenticatorType { get; set; }
 
         /// <summary>

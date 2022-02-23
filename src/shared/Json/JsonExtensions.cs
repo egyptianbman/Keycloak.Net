@@ -3,7 +3,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Keycloak.Net.Shared.Extensions
+namespace Keycloak.Net.Shared.Json
 {
     /// <summary>
     /// Utility class for Json.

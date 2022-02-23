@@ -1,13 +1,19 @@
-﻿using Keycloak.Net.Model.Converters;
+﻿using Keycloak.Net.Shared.Json;
 using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace Keycloak.Net.Model.Root
 {
-    [JsonConverter(typeof(ProtocolConverter))]
+    [JsonConverter(typeof(JsonEnumConverter<Protocol>))]
     public enum Protocol
     {
-        DockerV2, 
-        OpenIdConnect, 
+        [Description("dockerv2")]
+        DockerV2,
+
+        [Description("openid-connect")]
+        OpenIdConnect,
+
+        [Description("Saml")]
         Saml
     }
 }

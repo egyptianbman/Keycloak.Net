@@ -1,12 +1,16 @@
-﻿using Keycloak.Net.Model.Converters;
+﻿using Keycloak.Net.Shared.Json;
 using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace Keycloak.Net.Model.Root
 {
-    [JsonConverter(typeof(ConfigTypeConverter))]
+    [JsonConverter(typeof(JsonEnumConverter<ConfigType>))]
     public enum ConfigType
     {
-        Int, 
+        [Description("int")]
+        Int,
+
+        [Description("string")]
         String
     }
 }

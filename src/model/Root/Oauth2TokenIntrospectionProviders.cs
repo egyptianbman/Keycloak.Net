@@ -2,7 +2,10 @@
 
 namespace Keycloak.Net.Model.Root
 {
-    public class Oauth2TokenIntrospectionProviders
+    /// <summary>
+    /// 
+    /// </summary>
+    public class OAuth2TokenIntrospectionProviders
     {
         [JsonProperty("access_token")]
         public HasOrder AccessToken { get; set; }

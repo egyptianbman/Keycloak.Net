@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using FluentAssertions;
+using Flurl.Http;
 using Keycloak.Net.Model.Root;
 using Xunit;
 
@@ -56,7 +57,8 @@ namespace Keycloak.Net.Tests
         public async Task GetUserInfoAsync_NoAuth_ShouldReturnBadRequest()
         {
             var act = async () => await _keycloak.GetUserinfoAsync(_realm);
-            await act.Should().ThrowAsync<KeycloakException>().WithMessage($"*400 (Bad Request):*{{\"error\":\"invalid_request\",\"error_description\":\"Token not provided\"}}*");
+            await act.Should().ThrowAsync<KeycloakException>().WithMessage($"*invalid_request: Token not provided*")
+                .WithInnerException(typeof(FlurlHttpException)).WithMessage("*400 (Bad Request)*");
         }
 
         /// <summary>
@@ -88,7 +90,8 @@ namespace Keycloak.Net.Tests
         {
             var keycloak = _fixture.AdminCliClient;
             var act = async () => await keycloak.GetUserinfoAsync(_realm);
-            await act.Should().ThrowAsync<KeycloakException>().WithMessage($"*401 (Unauthorized):*{{\"error\":\"invalid_token\",\"error_description\":\"Token verification failed\"}}*");
+            await act.Should().ThrowAsync<KeycloakException>().WithMessage($"*invalid_token: Token verification failed*")
+                .WithInnerException(typeof(FlurlHttpException)).WithMessage("*401 (Unauthorized)*");
         }
 
         /// <summary>

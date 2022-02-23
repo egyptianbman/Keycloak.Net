@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Keycloak.Net.Model.AuthorizationManagement;
-using Keycloak.Net.Model.Converters;
+using Keycloak.Net.Shared.Json;
 using Newtonsoft.Json;
 
 namespace Keycloak.Net.Model.Clients
@@ -11,7 +11,6 @@ namespace Keycloak.Net.Model.Clients
         public PolicyConfig? Config { get; set; }
         
         [JsonProperty("decisionStrategy")]
-        [JsonConverter(typeof(DecisionStrategiesConverter))]
         public DecisionStrategy? DecisionStrategy { get; set; }
 
         [JsonProperty("description")]
@@ -20,8 +19,8 @@ namespace Keycloak.Net.Model.Clients
         [JsonProperty("id")]
         public string? Id { get; set; }
 
+        /// <inheritdoc cref="PolicyDecisionLogic"/>
         [JsonProperty("logic")]
-        [JsonConverter(typeof(PolicyDecisionLogicConverter))]
         public PolicyDecisionLogic? Logic { get; set; }
 
         [JsonProperty("name")]
@@ -45,8 +44,8 @@ namespace Keycloak.Net.Model.Clients
         [JsonProperty("scopesData")]
         public IEnumerable<Scope>? ScopesData { get; set; }
 
+        /// <inheritdoc cref="PolicyType"/>
         [JsonProperty("type")]
-        [JsonConverter(typeof(PolicyTypeConverter))]
         public PolicyType? Type { get; set; }
 
     }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Keycloak.Net.Model.Clients;
-using Keycloak.Net.Model.Converters;
+using Keycloak.Net.Shared.Json;
 using Keycloak.Net.Model.Groups;
 using Keycloak.Net.Model.IdentityProviders;
 using Keycloak.Net.Model.Users;
@@ -25,8 +25,8 @@ namespace Keycloak.Net.Model.RealmsAdmin
         [JsonProperty("ifResourceExists")]
         public string? IfResourceExists { get; set; }
 
+        /// <inheritdoc cref="Policies" />
         [JsonProperty("policy")]
-        [JsonConverter(typeof(PoliciesConverter))]
         public Policies? Policy { get; set; }
 
         [JsonProperty("roles")]

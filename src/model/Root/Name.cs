@@ -1,13 +1,19 @@
-﻿using Keycloak.Net.Model.Converters;
+﻿using Keycloak.Net.Shared.Json;
 using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace Keycloak.Net.Model.Root
 {
-    [JsonConverter(typeof(NameConverter))]
+    [JsonConverter(typeof(JsonEnumConverter<Name>))]
     public enum Name
     {
-        Base, 
-        Keycloak, 
+        [Description("base")]
+        Base,
+
+        [Description("keycloak")]
+        Keycloak,
+
+        [Description("rh-sso")]
         RhSso
     }
 }

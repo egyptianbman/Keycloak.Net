@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Keycloak.Net.Shared.Extensions;
+using Keycloak.Net.Shared.Json;
 using System;
 using Xunit;
 

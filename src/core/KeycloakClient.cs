@@ -5,7 +5,7 @@ using Flurl;
 using Flurl.Http;
 using Flurl.Http.Configuration;
 using Keycloak.Net.Model.Root;
-using Keycloak.Net.Shared.Extensions;
+using Keycloak.Net.Shared.Json;
 
 namespace Keycloak.Net
 {
@@ -96,7 +96,7 @@ namespace Keycloak.Net
                     // Wrap all error messages return from the Keycloak server into exception
                     var errorContent = call.HttpResponseMessage != null ? await call.HttpResponseMessage.Content.ReadAsStringAsync() : string.Empty;
                     var keycloakError = errorContent.DeserializeJson<KeycloakError>();
-                    call.Exception = new KeycloakException(keycloakError.Error, call.Exception);
+                    call.Exception = new KeycloakException(keycloakError.ToString(), call.Exception);
 
                     if (_settings.ReturnNullOnNotFound)
                     {

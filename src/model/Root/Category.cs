@@ -1,15 +1,25 @@
-﻿using Keycloak.Net.Model.Converters;
+﻿using Keycloak.Net.Shared.Json;
 using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace Keycloak.Net.Model.Root
 {
-    [JsonConverter(typeof(CategoryConverter))]
+    [JsonConverter(typeof(JsonEnumConverter<Category>))]
     public enum Category
     {
-        AttributeStatementMapper, 
-        DockerAuthMapper, 
-        GroupMapper, 
-        RoleMapper, 
+        [Description("attribute statement mapper")]
+        AttributeStatementMapper,
+
+        [Description("docker auth mapper")]
+        DockerAuthMapper,
+
+        [Description("group mapper")]
+        GroupMapper,
+
+        [Description("role mapper")]
+        RoleMapper,
+
+        [Description("token mapper")]
         TokenMapper
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using Keycloak.Net.Model.Converters;
 using Newtonsoft.Json;
 
 namespace Keycloak.Net.Model.Clients
@@ -7,6 +6,9 @@ namespace Keycloak.Net.Model.Clients
     /// <summary>
     /// Additional attributes for <see cref="Client"/>.
     /// </summary>
+    /// <remarks>
+    /// See <include file='../../keycloak.xml' path='keycloak/docs/github' />/services/src/main/java/org/keycloak/protocol/oidc/OIDCConfigAttributes.java.
+    /// </remarks>
     public class ClientAttributes
     {
         /// <summary>
@@ -166,15 +168,12 @@ namespace Keycloak.Net.Model.Clients
         [JsonProperty("oauth2.device.polling.interval")]
         public int? Oauth2DevicePollingInterval { get; set; }
 
-        /// <summary>
-        /// The code challenge method for PKCE is used. If not specified, keycloak does not applies PKCE to a client unless the client sends an authorization request with appropriate code challenge and code exchange method.
-        /// </summary>
+        /// <inheritdoc cref="PkceCodeChallengeMethod"/>
         [JsonProperty("pkce.code.challenge.method")]
-        public string? PkceCodeChallengeMethod { get; set; }
+        public PkceCodeChallengeMethod? PkceCodeChallengeMethod { get; set; }
 
         /// <inheritdoc cref="Clients.RequestObjectRequired"/>
         [JsonProperty("request.object.required")]
-        [JsonConverter(typeof(RequestObjectRequiredConverter))]
         public RequestObjectRequired? RequestObjectRequired { get; set; }
 
         /// <summary>
@@ -322,7 +321,6 @@ namespace Keycloak.Net.Model.Clients
 
         /// <inheritdoc cref="Clients.SamlSignatureCanonicalizationMethod"/>
         [JsonProperty("saml_signature_canonicalization_method")]
-        [JsonConverter(typeof(SamlSignatureCanonicalizationMethodConverter))]
         public SamlSignatureCanonicalizationMethod? SamlSignatureCanonicalizationMethod { get; set; }
 
         /// <summary>
@@ -334,7 +332,6 @@ namespace Keycloak.Net.Model.Clients
 
         /// <inheritdoc cref="Clients.SamlSignatureKeyName"/>
         [JsonProperty("saml.server.signature.keyinfo.xmlSigKeyInfoKeyNameTransformer")]
-        [JsonConverter(typeof(SamlSignatureKeyNameConverter))]
         public SamlSignatureKeyName? SamlServerSignatureKeyInfoXmlSigKeyInfoKeyNameTransformer { get; set; }
 
         /// <summary>

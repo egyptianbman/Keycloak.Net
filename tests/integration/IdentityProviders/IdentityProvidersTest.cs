@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Keycloak.Net.Model.IdentityProviders;
-using Keycloak.Net.Shared.Extensions;
+using Keycloak.Net.Shared.Json;
 using Xunit;
 
 namespace Keycloak.Net.Tests

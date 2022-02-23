@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Keycloak.Net.Shared.Extensions
+namespace Keycloak.Net.Shared.Json
 {
     public static class TypeExtensions
     {

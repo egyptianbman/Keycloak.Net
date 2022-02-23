@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Keycloak.Net.Model.Converters;
+using System.ComponentModel;
+using Keycloak.Net.Shared.Json;
 using Newtonsoft.Json;
 
 namespace Keycloak.Net.Model.AuthorizationManagement
@@ -18,13 +19,16 @@ namespace Keycloak.Net.Model.AuthorizationManagement
         [JsonProperty("description")]
         public string? Description { get; set; }
 
-        [JsonConverter(typeof(AuthorizationPermissionTypeConverter))]
+        /// <inheritdoc cref="AuthorizationPermissionType" />
+        [JsonProperty("type")]
         public AuthorizationPermissionType Type { get; set; }
 
-        [JsonConverter(typeof(PolicyDecisionLogicConverter))]
-        public PolicyDecisionLogic Logic { get; set; } 
+        /// <inheritdoc cref="PolicyDecisionLogic"/>
+        [JsonProperty("logic")]
+        public PolicyDecisionLogic Logic { get; set; }
 
-        [JsonConverter(typeof(DecisionStrategiesConverter))]
+        /// <inheritdoc cref="AuthorizationManagement.DecisionStrategy"/>
+        [JsonProperty("decisionStrategy")]
         public DecisionStrategy DecisionStrategy { get; set; }
 
         [JsonProperty("resourceType")]
@@ -43,18 +47,26 @@ namespace Keycloak.Net.Model.AuthorizationManagement
     /// <summary>
     /// <include file='../../keycloak.xml' path='keycloak/docs/javadocs' />
     /// </summary>
+    [JsonConverter(typeof(JsonEnumConverter<PolicyDecisionLogic>))]
     public enum PolicyDecisionLogic
     {
-        Positive, 
+        [Description("POSITIVE")]
+        Positive,
+
+        [Description("NEGATIVE")]
         Negative
     }
 
     /// <summary>
     /// <include file='../../keycloak.xml' path='keycloak/docs/javadocs' />
     /// </summary>
+    [JsonConverter(typeof(JsonEnumConverter<AuthorizationPermissionType>))]
     public enum AuthorizationPermissionType
     {   
-        Scope, 
+        [Description("scope")]
+        Scope,
+
+        [Description("resource")]
         Resource
     }
 
@@ -62,21 +74,25 @@ namespace Keycloak.Net.Model.AuthorizationManagement
     /// The decision strategy dictates how the policies associated with a given policy are evaluated and how a final decision is obtained.
     /// <include file='../../keycloak.xml' path='keycloak/docs/javadocs' />/org/keycloak/representations/idm/authorization/DecisionStrategy.html
     /// </summary>
+    [JsonConverter(typeof(JsonEnumConverter<DecisionStrategy>))]
     public enum DecisionStrategy
     {
         /// <summary>
         /// Defines that at least one policy must evaluate to a positive decision in order to the overall decision be also positive.
         /// </summary>
+        [Description("AFFIRMATIVE")]
         Affirmative,
 
         /// <summary>
         /// Defines that the number of positive decisions must be greater than the number of negative decisions.
         /// </summary>
+        [Description("CONSENSUS")]
         Consensus,
-        
+
         /// <summary>
         /// Defines that all policies must evaluate to a positive decision in order to the overall decision be also positive.
         /// </summary>
+        [Description("UNANIMOUS")]
         Unanimous
     }
 }

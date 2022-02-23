@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using System.IO;
 using Keycloak.Net.Model.Clients;
-using Keycloak.Net.Shared.Extensions;
+using Keycloak.Net.Shared.Json;
 using Xunit;
 
 namespace Keycloak.Net.Tests.Common.Extensions
@@ -22,6 +22,10 @@ namespace Keycloak.Net.Tests.Common.Extensions
             actual.Name.Should().Be("clientApp");
             actual.AdminUrl.Should().Be("http://clientApp.example.com");
             actual.AlwaysDisplayInConsole.Should().Be(true);
+            actual.Attributes.PkceCodeChallengeMethod.Should().Be(PkceCodeChallengeMethod.S256);
+            actual.Attributes.RequestObjectRequired.Should().Be(RequestObjectRequired.RequestUri);
+            actual.Attributes.SamlSignatureCanonicalizationMethod.Should().Be(SamlSignatureCanonicalizationMethod.None);
+            actual.Attributes.SamlServerSignatureKeyInfoXmlSigKeyInfoKeyNameTransformer.Should().Be(SamlSignatureKeyName.None);
         }
 
         [Fact]
@@ -61,6 +65,10 @@ namespace Keycloak.Net.Tests.Common.Extensions
 
             // Assert
             actual.Should().BeEquivalentTo(client);
+            actual.Attributes.PkceCodeChallengeMethod.Should().Be(PkceCodeChallengeMethod.S256);
+            actual.Attributes.RequestObjectRequired.Should().Be(RequestObjectRequired.RequestUri);
+            actual.Attributes.SamlSignatureCanonicalizationMethod.Should().Be(SamlSignatureCanonicalizationMethod.None);
+            actual.Attributes.SamlServerSignatureKeyInfoXmlSigKeyInfoKeyNameTransformer.Should().Be(SamlSignatureKeyName.None);
         }
 
         [Fact]
@@ -106,5 +114,15 @@ namespace Keycloak.Net.Tests.Common.Extensions
             }
         }
 
+        [Fact]
+        public void Serialize_Deserialize_Enum_ShouldSuccess()
+        {
+            var status = PkceCodeChallengeMethod.S256;
+            var serialized = status.SerializeJson();
+            var deserialized = serialized.DeserializeJson<PkceCodeChallengeMethod>();
+
+            serialized.Should().Contain(status.ToString());
+            deserialized.Should().Be(status);
+        }
     }
 }

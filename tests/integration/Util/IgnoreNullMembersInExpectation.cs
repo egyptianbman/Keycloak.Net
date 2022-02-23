@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions.Equivalency;
-using Keycloak.Net.Shared.Extensions;
+using Keycloak.Net.Shared.Json;
 
 namespace Keycloak.Net.Tests
 {

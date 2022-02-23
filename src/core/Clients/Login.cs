@@ -5,7 +5,7 @@ using Flurl.Http;
 using Keycloak.Net.Model.Clients;
 using Keycloak.Net.Model.Common;
 using Keycloak.Net.Model.Users;
-using Keycloak.Net.Shared.Extensions;
+using Keycloak.Net.Shared.Json;
 
 namespace Keycloak.Net
 {

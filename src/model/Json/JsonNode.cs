@@ -1,5 +1,4 @@
-﻿using Keycloak.Net.Model.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Keycloak.Net.Model.Json
 {
@@ -50,8 +49,8 @@ namespace Keycloak.Net.Model.Json
         [JsonProperty("missingNode")]
         public bool? MissingNode { get; set; }
 
+        /// <inheritdoc cref="Json.NodeType"/>
         [JsonProperty("nodeType")]
-        [JsonConverter(typeof(NodeTypeConverter))]
         public NodeType? NodeType { get; set; }
         
         [JsonProperty("null")]

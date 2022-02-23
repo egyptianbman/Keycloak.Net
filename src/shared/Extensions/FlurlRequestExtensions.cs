@@ -6,7 +6,7 @@ using Flurl;
 using Flurl.Http;
 
 [assembly: InternalsVisibleTo("Keycloak.Net")]
-namespace Keycloak.Net.Shared.Extensions
+namespace Keycloak.Net.Shared.Json
 {
     /// <summary>
     /// Extension methods for <see cref="IFlurlRequest"/>.

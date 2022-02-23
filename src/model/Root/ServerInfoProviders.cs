@@ -150,7 +150,7 @@ namespace Keycloak.Net.Model.Root
         public AuthorizationCache? Migration { get; set; }
 
         [JsonProperty("oauth2-token-introspection")]
-        public Oauth2TokenIntrospection? Oauth2TokenIntrospection { get; set; }
+        public OAuth2TokenIntrospection? Oauth2TokenIntrospection { get; set; }
 
         [JsonProperty("openid-connect-ext")]
         public ClientStorage? OpenIdConnectExt { get; set; }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Flurl.Http;
 using Keycloak.Net.Model.Groups;
-using Keycloak.Net.Shared.Extensions;
+using Keycloak.Net.Shared.Json;
 
 namespace Keycloak.Net
 {

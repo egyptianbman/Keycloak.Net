@@ -12,6 +12,7 @@ namespace Keycloak.Net.Model.Root
         [JsonProperty("name")]
         public string Name { get; set; } = null!;
 
+        /// <inheritdoc cref="Category"/>
         [JsonProperty("category")]
         public Category Category { get; set; }
 
