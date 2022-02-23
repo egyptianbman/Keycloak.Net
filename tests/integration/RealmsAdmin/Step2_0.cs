@@ -44,7 +44,8 @@ namespace Keycloak.Net.Tests
         public async Task GetRealmAsync_NotExists_ShouldThrowException()
         {
             var act = async () => await _keycloak.GetRealmAsync("realmNotExists");
-            await act.Should().ThrowAsync<FlurlHttpException>().WithMessage("Call failed with status code 404 (Not Found)*");
+            await act.Should().ThrowAsync<KeycloakException>().WithMessage("*Realm not found*")
+                .WithInnerException(typeof(FlurlHttpException)).WithMessage("*Call failed with status code 404 (Not Found)*");
         }
 
         [Fact]

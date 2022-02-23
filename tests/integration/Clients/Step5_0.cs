@@ -54,7 +54,7 @@ namespace Keycloak.Net.Tests
         [Fact]
         public async Task GetClientAsync()
         {
-            var result = await _keycloak.GetClientAsync(_realm, _fixture.Client.Id!);
+            var result = await _keycloak.GetClientByIdAsync(_realm, _fixture.Client.Id!);
             result.Should().NotBeNull();
         }
 
@@ -74,13 +74,13 @@ namespace Keycloak.Net.Tests
             };
             var result = await _keycloak.CreateClientAndRetrieveClientIdAsync(_realm, client);
             result.Should().NotBeNullOrEmpty();
-            await _keycloak.DeleteClientAsync(_realm, result);
+            await _keycloak.DeleteClientByIdAsync(_realm, result);
         }
 
         [Fact, TestCasePriority(99)]
         public async Task UpdateClientAsync()
         {
-            var result = await _keycloak.UpdateClientAsync(_realm, _fixture.Client.Id!, _fixture.Client);
+            var result = await _keycloak.UpdateClientByIdAsync(_realm, _fixture.Client.Id!, _fixture.Client);
             result.Should().BeTrue();
         }
 

@@ -91,7 +91,7 @@ namespace Keycloak.Net
         /// </summary>
         /// <param name="realm">realm name (not id!)</param>
         /// <param name="clientId">id of client (not <see cref="Client.ClientId"/>)</param>
-        public async Task<Client?> GetClientAsync(string realm, string clientId)
+        public async Task<Client?> GetClientByIdAsync(string realm, string clientId)
         {
             var response = await GetBaseUrl()
                 .AppendPathSegment($"/admin/realms/{realm}/clients/{clientId}")
@@ -107,7 +107,7 @@ namespace Keycloak.Net
         /// <param name="realm">realm name (not id!)</param>
         /// <param name="clientId">id of client (not <see cref="Client.ClientId"/>)</param>
         /// <param name="client"></param>
-        public async Task<bool> UpdateClientAsync(string realm, string clientId, Client client)
+        public async Task<bool> UpdateClientByIdAsync(string realm, string clientId, Client client)
         {
             var response = await GetBaseUrl()
                 .AppendPathSegment($"/admin/realms/{realm}/clients/{clientId}")
@@ -122,7 +122,7 @@ namespace Keycloak.Net
         /// </summary>
         /// <param name="realm">realm name (not id!)</param>
         /// <param name="clientId">id of client (not <see cref="Client.ClientId"/>)</param>
-        public async Task<bool> DeleteClientAsync(string realm, string clientId)
+        public async Task<bool> DeleteClientByIdAsync(string realm, string clientId)
         {
             var response = await GetBaseUrl()
                 .AppendPathSegment($"/admin/realms/{realm}/clients/{clientId}")

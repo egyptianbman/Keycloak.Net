@@ -85,9 +85,9 @@ namespace Keycloak.Net.Shared.Extensions
         }
         
         /// <inheritdoc cref="WithAuthenticationAsync(IFlurlRequest,Func{Task{string}})"/>
-        public static IFlurlRequest WithAuthentication(this IFlurlRequest request, Func<string> getToken)
+        public static IFlurlRequest WithAuthentication(this IFlurlRequest request, Func<string?> getToken)
         {
-            return WithAuthenticationAsync(request, async () => await Task.FromResult(getToken())).GetAwaiter().GetResult();
+            return WithAuthenticationAsync(request, async () => await Task.FromResult(getToken() ?? string.Empty)).GetAwaiter().GetResult();
         }
     }
 }

@@ -41,7 +41,7 @@ namespace Keycloak.Net.Tests
         public async Task DeleteClientAsync()
         {
             _fixture.Client = (await _keycloak.GetClientsAsync(_realm, clientId: _fixture.Client.ClientId))!.Single();
-            var result = await _keycloak.DeleteClientAsync(_realm, _fixture.Client.Id!);
+            var result = await _keycloak.DeleteClientByIdAsync(_realm, _fixture.Client.Id!);
             result.Should().BeTrue();
         }
 

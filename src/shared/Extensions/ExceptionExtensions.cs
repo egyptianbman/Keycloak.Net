@@ -11,27 +11,28 @@ namespace Keycloak.Net.Shared.Extensions
         /// <summary>
         /// Flatten and merges all inner exception messages
         /// </summary>
-        public static string FlattenError(this Exception exception, params string[] additionalErrors)
+        public static string FlattenError(this Exception exception, bool stackTrace = false)
         {
             var builder = new StringBuilder();
             var count = 0;
-            var currentException = exception;
+            Exception currentException;
+            var innerException = exception;
 
             do
             {
                 // Append all inner exception messages
+                currentException = innerException;
                 builder.AppendLine($"{(count != 0 ? "-> " : string.Empty)}[{currentException.GetType().Name}]: {currentException.Message}");
-                currentException = currentException.InnerException;
+                innerException = currentException.InnerException;
                 count++;
-            } while (currentException != null);
+            } while (innerException != null);
 
-            foreach (var error in additionalErrors)
+            if (stackTrace)
             {
-                // Append all additional error messages
-                if (!string.IsNullOrEmpty(error))
-                {
-                    builder.AppendLine($"-> {error}");
-                }
+                // include stack trace
+                builder.AppendLine();
+                builder.AppendLine("Stack Trace:");
+                builder.AppendLine(exception.StackTrace);
             }
 
             return builder.ToString();

@@ -14,16 +14,14 @@ namespace Keycloak.Net.Tests.Common.Extensions
             var ex1 = new InvalidOperationException(nameof(InvalidOperationException));
             var ex2 = new InvalidCastException(nameof(InvalidCastException), ex1);
             var ex3 = new Exception("OuterException", ex2);
-            var err = "addtionalErrorMessage";
 
             // Act
-            var exceptionMessage = ex3.FlattenError(err);
+            var exceptionMessage = ex3.FlattenError();
 
             // Assert
             exceptionMessage.Should().Contain("OuterException");
             exceptionMessage.Should().Contain(nameof(InvalidCastException));
             exceptionMessage.Should().Contain(nameof(InvalidOperationException));
-            exceptionMessage.Should().Contain(err);
         }
     }
 }
