@@ -22,7 +22,7 @@ namespace Keycloak.Net.Shared.Json
         }
 
         /// <inheritdoc />
-        public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.StartArray)
             {
@@ -33,8 +33,7 @@ namespace Keycloak.Net.Shared.Json
                 return items;
             }
 
-            var s = (string)reader.Value!;
-            return ConvertFromString(s);
+            return reader.Value is not string valueString ? default(object?) : ConvertFromString(valueString);
         }
 
         /// <inheritdoc />
@@ -79,9 +78,10 @@ namespace Keycloak.Net.Shared.Json
             }
 
             // Try parsing case sensitive first
-            var fieldMatch = fieldDict.Single(x => x.Value.Equals(valueString));
-            if (!Enum.TryParse(fieldMatch.Key, out TEnum value) &&
-                !Enum.TryParse(fieldMatch.Key, true, out value))
+            var fieldMatch = fieldDict.SingleOrDefault(x => x.Value.Equals(valueString));
+            var key = fieldMatch.Key ?? valueString;
+            if (!Enum.TryParse(key, out TEnum value) &&
+                !Enum.TryParse(key, true, out value))
             {
                 throw new ArgumentException($"Unknown {EntityString}: '{valueString}'.");
             }
